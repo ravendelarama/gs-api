@@ -86,9 +86,7 @@ export async function getUsers(req: Request, res: Response) {
         const data = await user.findMany();
 
         return res.json({
-            data,
-            rt: verifyRT,
-            at: verifyAT
+            data
         }).status(200);
     } catch(error) {
         res.json({
