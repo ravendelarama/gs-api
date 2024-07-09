@@ -97,3 +97,19 @@ export async function getUsers(req: Request, res: Response) {
         }).status(500);
     }
 }
+
+export async function logoutUser(req: Request, res: Response) {
+    try {
+        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken');
+
+        return res.json({
+            message: "Logout."
+        }).status(200);
+    } catch(error) {
+        res.json({
+            message: "Something went wrong.",
+            error
+        }).status(500);
+    }
+}
