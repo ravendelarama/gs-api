@@ -88,10 +88,10 @@ export async function getUsers(req: Request, res: Response) {
         return res.json({
             data
         }).status(200);
-    } catch(error) {
+    } catch(error: any | { name: string; message: string; }) {
         res.json({
-            message: "Something went wrong.",
-            error
+            // @ts-ignore
+            message: error?.name! == "JsonWebTokenError" ? "Unauthorized": "Something went wrong."
         }).status(500);
     }
 }
@@ -104,10 +104,10 @@ export async function logoutUser(req: Request, res: Response) {
         return res.json({
             message: "Logout."
         }).status(200);
-    } catch(error) {
+    } catch (error: any | { name: string; message: string; }) {
         res.json({
-            message: "Something went wrong.",
-            error
+            // @ts-ignore
+            message: error?.name! == "JsonWebTokenError" ? "Unauthorized": "Something went wrong"
         }).status(500);
     }
 }
