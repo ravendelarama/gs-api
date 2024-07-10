@@ -1,0 +1,8 @@
+{
+    "workbench.layoutControl.type": "both",
+    "workbench.editor.closeOnFileDelete": true,
+    "zenMode.hideActivityBar": true,
+    "workbench.activityBar.location": "default",
+    "workbench.activityBar.iconClickBehavior": "toggle",
+    "workbench.view.alwaysShowHeaderActions": false
+}

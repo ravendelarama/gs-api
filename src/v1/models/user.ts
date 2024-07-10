@@ -1,6 +1,5 @@
 import type { User } from "@prisma/client";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import db from "../lib/db";
+import db from "../../utils/db";
 
 interface UserCreateType {
     name: string;

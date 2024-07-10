@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import db from "../lib/db";
+import db from "../../utils/db";
 import user from "../models/user";
 import jwt from "jsonwebtoken";
 
@@ -34,13 +34,13 @@ export async function createUser(req: Request, res: Response) {
 
         res.cookie('accessToken', access_token, { httpOnly: true, secure: true });
         res.cookie('refreshToken', refresh_token, { httpOnly: true, secure: true });
-        
+
         return res.json({
             access_token,
             refresh_token
         }).status(201);
     } catch (error) {
-        res.json({message: "Something went wrong."}).status(500);
+        res.json({ message: "Something went wrong." }).status(500);
     }
 }
 
@@ -62,7 +62,7 @@ export async function loginUser(req: Request, res: Response) {
             expiresIn: "7 days"
         });
 
-        
+
         res.cookie('accessToken', access_token, { httpOnly: true, secure: true });
         res.cookie('refreshToken', refresh_token, { httpOnly: true, secure: true });
 
@@ -88,10 +88,10 @@ export async function getUsers(req: Request, res: Response) {
         return res.json({
             data
         }).status(200);
-    } catch(error: any | { name: string; message: string; }) {
+    } catch (error: any | { name: string; message: string; }) {
         res.json({
             // @ts-ignore
-            message: error?.name! == "JsonWebTokenError" ? "Unauthorized": "Something went wrong."
+            message: error?.name! == "JsonWebTokenError" ? "Unauthorized" : "Something went wrong."
         }).status(500);
     }
 }
@@ -107,7 +107,7 @@ export async function logoutUser(req: Request, res: Response) {
     } catch (error: any | { name: string; message: string; }) {
         res.json({
             // @ts-ignore
-            message: error?.name! == "JsonWebTokenError" ? "Unauthorized": "Something went wrong"
+            message: error?.name! == "JsonWebTokenError" ? "Unauthorized" : "Something went wrong"
         }).status(500);
     }
 }

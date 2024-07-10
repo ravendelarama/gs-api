@@ -8,18 +8,17 @@ const http_1 = __importDefault(require("http"));
 const cors_1 = __importDefault(require("cors"));
 const compression_1 = __importDefault(require("compression"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const index_1 = __importDefault(require("./routes/index"));
-dotenv_1.default.config();
+const index_1 = __importDefault(require("./v1/routes/index"));
+const config_1 = require("./config/config");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({ credentials: true }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 app.use((0, compression_1.default)());
-app.use('/api', index_1.default);
+// api versions
+app.use('/api/v1', index_1.default);
 const server = http_1.default.createServer(app);
-const PORT = process.env.PORT;
-server.listen(PORT !== null && PORT !== void 0 ? PORT : 3000, () => {
-    console.log(`Server is running in port ${PORT !== null && PORT !== void 0 ? PORT : 3000}`);
+server.listen(config_1.config.port, () => {
+    console.log(`Server is running in port ${config_1.config.port}`);
 });
